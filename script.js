@@ -1,4 +1,5 @@
-const name = "maynard";
-const color = "Red";
+const game = {
+  board: ["", "", "", "", "", "", "", "", ""],
+};
 
-console.log({ name, color });
+gameModule.publicMethod();

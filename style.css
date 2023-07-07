@@ -1,0 +1,18 @@
+/*Toggle new game */
+
+
+.cell {
+  border: solid 2px red;
+  width: 100px;
+  height: 100px;
+}
+
+.top,
+.mid,
+.bot {
+  display: flex;
+}
+
+
+/*Dropdown menu for difficulty
+

@@ -10,12 +10,51 @@
   <body>
     <h1>Tic Tac Toe</h1>
     <h2>
-      <div class="score">Score</div>
-      <div class="player_1">Player 1</div>
-      <div class="player_2">Player 2</div>
-      <div class="AI Bot">AI Bot</div>
-    </h2>
+      <div class="diffculty">
+        <button class="dropdown-toggle" id="dropdownButton">Difficulty</button>
+        <ul class="dropdown-menu" id="dropdownMenu">
+          <li>Easy</li>
+          <li>Medium</li>
+          <li>Hard</li>
+        </ul>
+      </div>
 
+      <button class="back">Back</button>
+      <button class="clear">Restart</button>
+      <div class="score">Score</div>
+      <div class="p1_contaner">
+        <div class="player_1">Player 1</div>
+        <div class="player1_score">0</div>
+      </div>
+      <div class="tie_container">
+        <div class="tie_container">Tie</div>
+        <div class="tie_score">0</div>
+      </div>
+      <div class="p2_container">
+        <div class="player_2">Player 2</div>
+        <div class="player2_score">0</div>
+      </div>
+    </h2>
+    <h3 div class="board">
+      <div class="top">
+        <div class="top_a cell"></div>
+        <div class="top_b cell"></div>
+        <div class="top_b cell"></div>
+      </div>
+      <div class="mid">
+        <div class="mid_a cell"></div>
+        <div class="mid_b cell"></div>
+        <div class="mid_c cell"></div>
+      </div>
+      <div class="bot">
+        <div class="bot_a cell"></div>
+        <div class="bot_b cell"></div>
+        <div class="bot_c cell"></div>
+      </div>
+    </h3>
+    <h4>
+      <button class="play_again">Play again</button>
+    </h4>
     <script src="script.js"></script>
   </body>
 </html>
