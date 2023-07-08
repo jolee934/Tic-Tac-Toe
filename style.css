@@ -13,6 +13,11 @@
   display: flex;
 }
 
+.test {
+  border: solid 2px blue;
+  width: 100px;
+  height: 100px;
+}
 
 /*Dropdown menu for difficulty
 
