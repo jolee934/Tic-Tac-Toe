@@ -69,4 +69,15 @@ const cells = document.querySelectorAll(".cell");
 //   };
 // })();
 
-console.log(cells);
+function click() {
+  console.log("clicked");
+}
+
+cells.forEach((cell) => {
+  addEventListener("click", function (e) {
+    const clickedCell = e.target;
+    if (clickedCell.classList.contains("top_a")) {
+      console.log("class A");
+    }
+  });
+});
