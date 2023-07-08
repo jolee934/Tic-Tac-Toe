@@ -16,15 +16,10 @@ var gameBoard = (function () {
   };
 
   function updateBoard() {
-    topA.textContent = game.board[0];
-    topB.textContent = game.board[1];
-    topC.textContent = game.board[2];
-    midA.textContent = game.board[3];
-    midB.textContent = game.board[4];
-    midC.textContent = game.board[5];
-    botA.textContent = game.board[6];
-    botB.textContent = game.board[7];
-    botC.textContent = game.board[8];
+    cells.forEach((cell) => {
+      const i = cell.dataset.index;
+      cell.textContent = game.board[i];
+    });
   }
 
   return {
@@ -34,41 +29,6 @@ var gameBoard = (function () {
 })();
 
 gameBoard.updateBoard();
-// //PLAYER 1//
-// var playerOneFactory = (function () {
-//   var playerOnescore = 0;
-//   var playerOneTurn = true;
-//   function click() {
-//     if (playerOneTurn === true) {
-//       console.log("p1 working");
-//       playerOneTurn = false;
-//       playerTwoFactory.playerTwoTurn = true;
-//     }
-//   }
-
-//   return {
-//     playerOnescore: playerOnescore,
-//     playerOneTurn: playerOneTurn,
-//     click: click,
-//   };
-// })();
-
-// //PLAYER 2//
-// var playerTwoFactory = (function () {
-//   var playerTwoscore = 0;
-//   var playerTwoTurn = true;
-//   function click() {
-//     if (playerTwoTurn === true) {
-//       console.log("p2 working");
-//       playerTwoTurn = false;
-//       playerOneFactory.playerOneTurn = true;
-//     }
-//   }
-//   return {
-//     playerTwoscore: playerTwoscore,
-//     playerTwoTurn: playerTwoTurn,
-//   };
-// })();
 
 function click() {
   console.log("clicked");
@@ -78,15 +38,27 @@ cells.forEach((cell) => {
   cell.addEventListener("click", function (e) {
     const clickedCell = e.target;
     if (clickedCell.classList.contains("top_a")) {
-      gameBoard.game.board[0] = "test";
+      gameBoard.game.board[0] = "A";
       gameBoard.updateBoard();
     }
     if (clickedCell.classList.contains("top_b")) {
-      gameBoard.game.board[1] = "test";
+      gameBoard.game.board[1] = "B";
       gameBoard.updateBoard();
     }
     if (clickedCell.classList.contains("top_c")) {
-      gameBoard.game.board[2] = "test";
+      gameBoard.game.board[2] = "C";
+      gameBoard.updateBoard();
+    }
+    if (clickedCell.classList.contains("mid_a")) {
+      gameBoard.game.board[3] = "D";
+      gameBoard.updateBoard();
+    }
+    if (clickedCell.classList.contains("mid_b")) {
+      gameBoard.game.board[4] = "E";
+      gameBoard.updateBoard();
+    }
+    if (clickedCell.classList.contains("mid_c")) {
+      gameBoard.game.board[5] = "F";
       gameBoard.updateBoard();
     }
   });
