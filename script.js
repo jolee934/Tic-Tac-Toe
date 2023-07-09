@@ -20,7 +20,11 @@ var gameBoard = (function () {
     board: ["", "", "", "", "", "", "", "", ""],
   };
 
+  //use this to turn off the game once someone wins
   var gameRunning = true;
+
+  //variable to determine which player's turn it is for each game; alternates every game
+  var whoseTurn = 1;
 
   function restartGame() {
     game.board.forEach((n, i, arr) => {
@@ -28,6 +32,13 @@ var gameBoard = (function () {
     });
     updateBoard();
     gameRunning = true;
+    //Changes Player turns each restart
+    if (whoseTurn % 2) {
+      pOne.turn = false;
+    } else {
+      pOne.turn = true;
+    }
+    whoseTurn = whoseTurn + 1;
   }
 
   function updateBoard() {
@@ -35,6 +46,9 @@ var gameBoard = (function () {
       const i = cell.dataset.index;
       cell.textContent = game.board[i];
     });
+  }
+
+  function checkWinner() {
     if (
       game.board[0] != "" &&
       game.board[1] != "" &&
@@ -53,6 +67,7 @@ var gameBoard = (function () {
       }
       gameRunning = false;
     }
+    //updates score if there is a winner
     playerOneScore.textContent = pOne.score;
     playerTwoScore.textContent = pTwo.score;
   }
@@ -61,6 +76,7 @@ var gameBoard = (function () {
     updateBoard: updateBoard,
     restartGame: restartGame,
     gameRunning: gameRunning,
+    checkWinner: checkWinner,
     game: game,
   };
 })();
@@ -75,24 +91,6 @@ const pTwo = playerFactory(0);
 console.log(pOne);
 console.log(pTwo);
 
-// var pOne = (function () {
-//   let pOneTurn = true;
-//   let pOneScore = 0;
-
-//   return {
-//     pOneTurn: pOneTurn,
-//     pOneScore: pOneScore,
-//   };
-// })();
-
-// var pTwo = (function () {
-//   let pTwoScore = 0;
-
-//   return {
-//     pTwoScore: pTwoScore,
-//   };
-// })();
-
 //*********Clicking action *************/
 
 cells.forEach((cell) => {
@@ -101,6 +99,7 @@ cells.forEach((cell) => {
     const i = cell.dataset.index;
     if (gameBoard.game.board[i] === "" && pOne.turn === true) {
       gameBoard.game.board[i] = "X";
+      gameBoard.checkWinner();
       gameBoard.updateBoard();
       pOne.turn = false;
     }
@@ -113,6 +112,7 @@ cells.forEach((cell) => {
     const i = cell.dataset.index;
     if (gameBoard.game.board[i] === "" && pOne.turn === false) {
       gameBoard.game.board[i] = "0";
+      gameBoard.checkWinner();
       gameBoard.updateBoard();
       pOne.turn = true;
     }
@@ -122,12 +122,6 @@ cells.forEach((cell) => {
 //*********Restart game *************/
 restartButton.addEventListener("click", gameBoard.restartGame);
 
-//***********Winning mechanic *************/
-
-// 123, 345, 789;
-
-// 147;
-// 258;
-// 369;
-// 159;
-// 357;
+//check winner
+//const combination = [1, 2, 3]
+// for (const winner of game) {
