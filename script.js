@@ -21,7 +21,7 @@ var gameBoard = (function () {
   };
 
   //use this to turn off the game once someone wins
-  var gameRunning = true;
+  let gameRunning = true;
 
   //variable to determine which player's turn it is for each game; alternates every game
   var whoseTurn = 1;
@@ -64,18 +64,16 @@ var gameBoard = (function () {
       if (
         game.board[a] &&
         game.board[a] === game.board[b] &&
-        game.board[a] === game.board[c] &&
-        gameRunning === true
+        game.board[a] === game.board[c]
       ) {
         if (pOne.turn === true) {
           console.log("Player 1 wins");
           pOne.score = pOne.score + 1;
-          console.log(pOne.score);
         } else {
           console.log("Player 2 wins");
           pTwo.score = pTwo.score + 1;
         }
-        gameRunning = false;
+        gameBoard.gameRunning = false;
       }
       //updates score if there is a winner
       playerOneScore.textContent = pOne.score;
@@ -99,8 +97,6 @@ const playerFactory = (score, turn) => {
 
 const pOne = playerFactory(0, true);
 const pTwo = playerFactory(0);
-console.log(pOne);
-console.log(pTwo);
 
 //*********Clicking action *************/
 
@@ -108,7 +104,11 @@ cells.forEach((cell) => {
   cell.addEventListener("click", function (e) {
     const clickedCell = e.target;
     const i = cell.dataset.index;
-    if (gameBoard.game.board[i] === "" && pOne.turn === true) {
+    if (
+      gameBoard.game.board[i] === "" &&
+      pOne.turn === true &&
+      gameBoard.gameRunning === true
+    ) {
       gameBoard.game.board[i] = "X";
       gameBoard.checkWinner();
       gameBoard.updateBoard();
@@ -121,7 +121,11 @@ cells.forEach((cell) => {
   cell.addEventListener("click", function (e) {
     const clickedCell = e.target;
     const i = cell.dataset.index;
-    if (gameBoard.game.board[i] === "" && pOne.turn === false) {
+    if (
+      gameBoard.game.board[i] === "" &&
+      pOne.turn === false &&
+      gameBoard.gameRunning === true
+    ) {
       gameBoard.game.board[i] = "0";
       gameBoard.checkWinner();
       gameBoard.updateBoard();
