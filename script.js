@@ -49,27 +49,38 @@ var gameBoard = (function () {
   }
 
   function checkWinner() {
-    if (
-      game.board[0] != "" &&
-      game.board[1] != "" &&
-      game.board[2] != "" &&
-      game.board[0] === game.board[1] &&
-      game.board[0] === game.board[2] &&
-      gameRunning === true
-    ) {
-      if (pOne.turn === true) {
-        console.log("Player 1 wins");
-        pOne.score = pOne.score + 1;
-        console.log(pOne.score);
-      } else {
-        console.log("Player 2 wins");
-        pTwo.score = pTwo.score + 1;
+    const winningNumbers = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [3, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (const x of winningNumbers) {
+      const [a, b, c] = x;
+      if (
+        game.board[a] &&
+        game.board[a] === game.board[b] &&
+        game.board[a] === game.board[c] &&
+        gameRunning === true
+      ) {
+        if (pOne.turn === true) {
+          console.log("Player 1 wins");
+          pOne.score = pOne.score + 1;
+          console.log(pOne.score);
+        } else {
+          console.log("Player 2 wins");
+          pTwo.score = pTwo.score + 1;
+        }
+        gameRunning = false;
       }
-      gameRunning = false;
+      //updates score if there is a winner
+      playerOneScore.textContent = pOne.score;
+      playerTwoScore.textContent = pTwo.score;
     }
-    //updates score if there is a winner
-    playerOneScore.textContent = pOne.score;
-    playerTwoScore.textContent = pTwo.score;
   }
 
   return {
