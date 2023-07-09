@@ -31,7 +31,7 @@ var gameBoard = (function () {
       arr[i] = "";
     });
     updateBoard();
-    gameRunning = true;
+    gameBoard.gameRunning = true;
     //Changes Player turns each restart
     if (whoseTurn % 2) {
       pOne.turn = false;
