@@ -11,6 +11,8 @@ const restartButton = document.querySelector(".restart");
 const backButton = document.querySelector(".back");
 const difficultyButton = document.querySelector(".difficulty");
 const cells = document.querySelectorAll(".cell");
+const playerOneScore = document.querySelector(".player1_score");
+const playerTwoScore = document.querySelector(".player2_score");
 
 //*********Game Board Module *************/
 var gameBoard = (function () {
@@ -25,6 +27,7 @@ var gameBoard = (function () {
       arr[i] = "";
     });
     updateBoard();
+    gameRunning = true;
   }
 
   function updateBoard() {
@@ -42,11 +45,16 @@ var gameBoard = (function () {
     ) {
       if (pOne.turn === true) {
         console.log("Player 1 wins");
+        pOne.score = pOne.score + 1;
+        console.log(pOne.score);
       } else {
         console.log("Player 2 wins");
+        pTwo.score = pTwo.score + 1;
       }
       gameRunning = false;
     }
+    playerOneScore.textContent = pOne.score;
+    playerTwoScore.textContent = pTwo.score;
   }
 
   return {
@@ -62,8 +70,8 @@ const playerFactory = (score, turn) => {
   return { score, turn };
 };
 
-const pOne = playerFactory("0", true);
-const pTwo = playerFactory("0");
+const pOne = playerFactory(0, true);
+const pTwo = playerFactory(0);
 console.log(pOne);
 console.log(pTwo);
 
