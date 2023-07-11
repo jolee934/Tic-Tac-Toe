@@ -24,8 +24,13 @@ var gameBoard = (function () {
   //use this to turn off the game once someone wins
   let gameRunning = true;
 
+  //use this to determine who goes first, based on even/odd numbered game
+  let gameNumber = 2;
+
+  //tie variable
   let tie = 0;
 
+  //Function to restart the game
   function restartGame() {
     game.board.forEach((n, i, arr) => {
       arr[i] = "";
@@ -33,8 +38,14 @@ var gameBoard = (function () {
     updateBoard();
     gameBoard.gameRunning = true;
     //Changes Player turns each restart
-    pOne.toggleTurn();
-    pTwo.toggleTurn();
+    if (gameBoard.gameNumber % 2) {
+      pOne.turn = true;
+      pTwo.turn = false;
+    } else {
+      pOne.turn = false;
+      pTwo.turn = true;
+    }
+    gameBoard.gameNumber++;
   }
 
   function updateBoard() {
@@ -65,14 +76,11 @@ var gameBoard = (function () {
         if (pOne.turn === true) {
           console.log("Player 1 wins");
           pOne.incrementScore();
-          console.log(pOne.score);
         } else {
           console.log("Player 2 wins");
-          pTwo.score = pTwo.score + 1;
+          pTwo.incrementScore();
         }
         gameBoard.gameRunning = false;
-        console.log(gameRunning);
-        console.log(gameBoard.gameRunning);
         break;
       }
 
@@ -110,32 +118,28 @@ var gameBoard = (function () {
     checkTie: checkTie,
     checkWinner: checkWinner,
     game: game,
+    gameNumber: gameNumber,
   };
 })();
 
 //*********Player Factory*************/
-const playerFactory = (score, tturn) => {
-  const incrementScore = () => {
-    score++;
+const playerFactory = (score, turn) => {
+  const incrementScore = function () {
+    this.score++;
   };
-  const toggleTurn = () => {
-    turn = !turn;
+  const toggleTurn = function () {
+    this.turn = !this.turn;
   };
 
-  return { turn, score, toggleTurn, incrementScore };
+  const isTurn = () => {
+    return turn;
+  };
+
+  return { turn, isTurn, score, toggleTurn, incrementScore };
 };
 
 const pOne = playerFactory(0, true);
 const pTwo = playerFactory(0);
-
-pOne.incrementScore();
-console.log(pOne.score);
-console.log(pOne.turn);
-pOne.toggleTurn();
-console.log(pOne.turn);
-pOne.toggleTurn();
-console.log(pOne.turn);
-pOne.toggleTurn();
 
 //*********Clicking action *************/
 
@@ -152,7 +156,7 @@ cells.forEach((cell) => {
       gameBoard.checkWinner();
 
       gameBoard.updateBoard();
-      pOne.turn = false;
+      pOne.toggleTurn();
     }
   });
 });
@@ -170,7 +174,7 @@ cells.forEach((cell) => {
       gameBoard.checkWinner();
 
       gameBoard.updateBoard();
-      pOne.turn = true;
+      pOne.toggleTurn();
     }
   });
 });
