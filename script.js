@@ -25,7 +25,7 @@ var gameBoard = (function () {
   let gameRunning = true;
 
   //variable to determine which player's turn it is for each game; alternates every game
-  var whoseTurn = 1;
+  // var whoseTurn = 1;
 
   let tie = 0;
 
@@ -36,12 +36,8 @@ var gameBoard = (function () {
     updateBoard();
     gameBoard.gameRunning = true;
     //Changes Player turns each restart
-    if (whoseTurn % 2) {
-      pOne.turn = false;
-    } else {
-      pOne.turn = true;
-    }
-    whoseTurn = whoseTurn + 1;
+    pOne.toggleTurn();
+    pTwo.toggleTurn();
   }
 
   function updateBoard() {
@@ -77,6 +73,9 @@ var gameBoard = (function () {
           pTwo.score = pTwo.score + 1;
         }
         gameBoard.gameRunning = false;
+        console.log(gameRunning);
+        console.log(gameBoard.gameRunning);
+        break;
       }
 
       //updates score if there is a winner
@@ -118,7 +117,14 @@ var gameBoard = (function () {
 
 //*********Player Factory*************/
 const playerFactory = (score, turn) => {
-  return { score, turn };
+  const incrementScore = () => {
+    score = score + 1;
+  };
+  const toggleTurn = () => {
+    turn = !turn;
+  };
+
+  return { toggleTurn, incrementScore };
 };
 
 const pOne = playerFactory(0, true);
@@ -164,3 +170,5 @@ cells.forEach((cell) => {
 
 //*********Restart game *************/
 restartButton.addEventListener("click", gameBoard.restartGame);
+
+console.log(pOne.turn);
