@@ -65,7 +65,7 @@ var gameBoard = (function () {
         if (pOne.turn === true) {
           console.log("Player 1 wins");
           pOne.incrementScore();
-          conso;
+          console.log(pOne.score);
         } else {
           console.log("Player 2 wins");
           pTwo.score = pTwo.score + 1;
@@ -114,9 +114,9 @@ var gameBoard = (function () {
 })();
 
 //*********Player Factory*************/
-const playerFactory = (score, turn) => {
+const playerFactory = (score, tturn) => {
   const incrementScore = () => {
-    score = score + 1;
+    score++;
   };
   const toggleTurn = () => {
     turn = !turn;
@@ -127,6 +127,15 @@ const playerFactory = (score, turn) => {
 
 const pOne = playerFactory(0, true);
 const pTwo = playerFactory(0);
+
+pOne.incrementScore();
+console.log(pOne.score);
+console.log(pOne.turn);
+pOne.toggleTurn();
+console.log(pOne.turn);
+pOne.toggleTurn();
+console.log(pOne.turn);
+pOne.toggleTurn();
 
 //*********Clicking action *************/
 
