@@ -24,9 +24,6 @@ var gameBoard = (function () {
   //use this to turn off the game once someone wins
   let gameRunning = true;
 
-  //variable to determine which player's turn it is for each game; alternates every game
-  // var whoseTurn = 1;
-
   let tie = 0;
 
   function restartGame() {
@@ -67,7 +64,8 @@ var gameBoard = (function () {
       ) {
         if (pOne.turn === true) {
           console.log("Player 1 wins");
-          pOne.score = pOne.score + 1;
+          pOne.incrementScore();
+          conso;
         } else {
           console.log("Player 2 wins");
           pTwo.score = pTwo.score + 1;
@@ -124,7 +122,7 @@ const playerFactory = (score, turn) => {
     turn = !turn;
   };
 
-  return { toggleTurn, incrementScore };
+  return { turn, score, toggleTurn, incrementScore };
 };
 
 const pOne = playerFactory(0, true);
@@ -170,5 +168,3 @@ cells.forEach((cell) => {
 
 //*********Restart game *************/
 restartButton.addEventListener("click", gameBoard.restartGame);
-
-console.log(pOne.turn);
