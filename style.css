@@ -1,6 +1,5 @@
 /*Toggle new game */
 
-
 .cell {
   border: solid 2px red;
   width: 100px;
@@ -19,5 +18,17 @@
   height: 100px;
 }
 
-/*Dropdown menu for difficulty
+/*toggle hidden on and off*/
+.hidden {
+  display: none;
+}
 
+/*Dropdown menu for difficulty*/
+
+.difficulty .dropdown-menu {
+  display: none;
+}
+
+.difficulty.open .dropdown-menu {
+  display: block;
+}

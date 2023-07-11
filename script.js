@@ -7,13 +7,17 @@ const midC = document.querySelector(".mid_c");
 const botA = document.querySelector(".bot_a");
 const botB = document.querySelector(".bot_b");
 const botC = document.querySelector(".bot_c");
-const restartButton = document.querySelector(".restart");
+const restartButton = document.querySelector(".continue");
 const backButton = document.querySelector(".back");
 const difficultyButton = document.querySelector(".difficulty");
 const cells = document.querySelectorAll(".cell");
 const playerOneScore = document.querySelector(".player1_score");
 const playerTwoScore = document.querySelector(".player2_score");
 const tieScore = document.querySelector(".tie_score");
+const winner = document.querySelector(".winner");
+const popup = document.querySelector(".popup");
+const dropdownToggle = document.querySelector(".dropdown-toggle");
+const dropdownMenu = document.querySelector(".dropdown-menu");
 
 //*********Game Board Module *************/
 var gameBoard = (function () {
@@ -35,7 +39,9 @@ var gameBoard = (function () {
     game.board.forEach((n, i, arr) => {
       arr[i] = "";
     });
+    winner.textContent = "";
     updateBoard();
+    popupToggle();
     gameBoard.gameRunning = true;
     //Changes Player turns each restart
     if (gameBoard.gameNumber % 2) {
@@ -75,12 +81,15 @@ var gameBoard = (function () {
       ) {
         if (pOne.turn === true) {
           console.log("Player 1 wins");
+          winner.textContent = "Player 1 Wins! Congratulations!";
           pOne.incrementScore();
         } else {
           console.log("Player 2 wins");
+          winner.textContent = "Player 2 Wins! Congratulations!";
           pTwo.incrementScore();
         }
         gameBoard.gameRunning = false;
+        popupToggle();
         break;
       }
 
@@ -107,6 +116,7 @@ var gameBoard = (function () {
     ) {
       tie = tie + 1;
       console.log("tie game");
+      winner.textContent = "Tie Game!";
       gameBoard.gameRunning = false;
     }
   }
@@ -181,3 +191,14 @@ cells.forEach((cell) => {
 
 //*********Restart game *************/
 restartButton.addEventListener("click", gameBoard.restartGame);
+
+//*********Toggle popup *************/
+function popupToggle() {
+  popup.classList.toggle("hidden");
+}
+
+//*********Difficulty drop down menu *************/
+dropdownToggle.addEventListener("click", function () {
+  dropdownMenu.style.display =
+    dropdownMenu.style.display === "none" ? "block" : "none";
+});
