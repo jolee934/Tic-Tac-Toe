@@ -16,8 +16,8 @@ const playerTwoScore = document.querySelector(".player2_score");
 const tieScore = document.querySelector(".tie_score");
 const winner = document.querySelector(".winner");
 const popup = document.querySelector(".popup");
-const dropdownToggle = document.querySelector(".dropdown-toggle");
-const dropdownMenu = document.querySelector(".dropdown-menu");
+const dropdownToggle = document.querySelector(".dropdownbtn");
+const dropdownMenu = document.querySelector(".dropdownMenu");
 
 //*********Game Board Module *************/
 var gameBoard = (function () {
@@ -118,6 +118,7 @@ var gameBoard = (function () {
       console.log("tie game");
       winner.textContent = "Tie Game!";
       gameBoard.gameRunning = false;
+      popupToggle();
     }
   }
 

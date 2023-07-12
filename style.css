@@ -1,5 +1,20 @@
 /*Toggle new game */
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/*Difficulty and back button */
+h2 {
+  display: flex;
+}
+
+/*Score board */
+h3 {
+}
+
+/*Tic Tac Toe Board */
 .cell {
   border: solid 2px red;
   width: 100px;
@@ -12,12 +27,6 @@
   display: flex;
 }
 
-.test {
-  border: solid 2px blue;
-  width: 100px;
-  height: 100px;
-}
-
 /*toggle hidden on and off*/
 .hidden {
   display: none;
@@ -25,10 +34,20 @@
 
 /*Dropdown menu for difficulty*/
 
-.difficulty .dropdown-menu {
+.dropdownbtn {
+  background-color: none;
+  color: black;
+  font-size: 25px;
+  box-shadow: none;
+  border: none;
+  min-width: 240px;
+  border-bottom: 2px solid black;
+}
+
+.difficulty .dropdownMenu {
   display: none;
 }
 
-.difficulty.open .dropdown-menu {
+.difficulty.open .dropdownMenu {
   display: block;
 }
