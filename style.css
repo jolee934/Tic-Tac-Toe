@@ -3,10 +3,16 @@
 body {
   display: flex;
   flex-direction: column;
+  margin: 0px;
 }
 
 h1 {
-  align-self: center;
+  border-bottom: solid 2px green;
+  width: 100vw;
+}
+
+.title {
+  text-align: center;
 }
 
 /*Difficulty and back button */
@@ -23,6 +29,7 @@ h2 {
 
 .score {
   align-self: center;
+  font-size: 40px;
 }
 /*Score board */
 h3 {
@@ -41,6 +48,15 @@ h3 {
 .p2_container {
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.player1_score,
+.player2_score {
+  padding-left: 23px;
+}
+
+.tie_score {
+  padding-left: 10px;
 }
 
 /*Tic Tac Toe Board */
