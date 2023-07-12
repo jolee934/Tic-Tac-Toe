@@ -23,17 +23,19 @@
     </h2>
     <h3>
       <div class="score">Score</div>
-      <div class="p1_contaner">
-        <div class="player_1">Player 1</div>
-        <div class="player1_score">0</div>
-      </div>
-      <div class="tie_container">
-        <div class="tie">Tie</div>
-        <div class="tie_score">0</div>
-      </div>
-      <div class="p2_container">
-        <div class="player_2">Player 2</div>
-        <div class="player2_score">0</div>
+      <div class="player_container">
+        <div class="p1_container">
+          <div class="player_1">Player 1</div>
+          <div class="player1_score">0</div>
+        </div>
+        <div class="tie_container">
+          <div class="tie">Tie</div>
+          <div class="tie_score">0</div>
+        </div>
+        <div class="p2_container">
+          <div class="player_2">Player 2</div>
+          <div class="player2_score">0</div>
+        </div>
       </div>
     </h3>
     <h4>
@@ -52,14 +54,15 @@
         <div class="bot_b cell" data-index="7"></div>
         <div class="bot_c cell" data-index="8"></div>
       </div>
-    </h4>
-    <h5>
-      <div class="popup hidden">
-        <div class="winner"></div>
-        <button class="back">Back</button>
-        <button class="continue">Continue playing</button>
+      <div class="popup_container">
+        <div class="popup hidden">
+          <div class="winner">Player wins!</div>
+          <button class="back">Back to Title Screen</button>
+          <button class="continue">Continue playing</button>
+        </div>
       </div>
-    </h5>
+    </h4>
+
     <script src="script.js"></script>
   </body>
 </html>

@@ -5,16 +5,52 @@ body {
   flex-direction: column;
 }
 
+h1 {
+  align-self: center;
+}
+
 /*Difficulty and back button */
 h2 {
   display: flex;
+  align-self: center;
 }
 
+.difficulty,
+.back {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.score {
+  align-self: center;
+}
 /*Score board */
 h3 {
+  display: flex;
+  flex-direction: column;
+}
+
+.player_container {
+  display: flex;
+
+  justify-content: center;
+}
+
+.p1_container,
+.tie_container,
+.p2_container {
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 /*Tic Tac Toe Board */
+
+h4 {
+  position: relative;
+  align-self: center;
+  border: solid 2px yellow;
+}
+
 .cell {
   border: solid 2px red;
   width: 100px;
@@ -27,10 +63,49 @@ h3 {
   display: flex;
 }
 
-/*toggle hidden on and off*/
-.hidden {
-  display: none;
+/* popup button */
+.popup_container {
+  align-self: center;
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  transform: translate(-25%, -50%);
 }
+
+.popup {
+  display: grid;
+  grid-template: 50% 50% / 10% 40% 40% 10%;
+  width: 400px;
+  height: 100px;
+  border: 2px solid grey;
+  background: green;
+}
+
+.winner {
+  grid-column: 1 / span 5;
+  grid-row-start: 1;
+  align-self: center;
+  justify-self: center;
+  font-size: 30px;
+}
+
+.continue {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  width: 120px;
+  max-height: 35px;
+}
+.back {
+  grid-column-start: 3;
+  grid-row-start: 2;
+  width: 120px;
+  max-height: 35px;
+}
+
+/*toggle hidden on and off*/
+/* .hidden {
+  display: none;
+} */
 
 /*Dropdown menu for difficulty*/
 
