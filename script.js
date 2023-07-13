@@ -48,14 +48,17 @@ var gameBoard = (function () {
 
   //Function to restart the game
   function restartGame() {
+    //clears the board array
     game.board.forEach((n, i, arr) => {
       arr[i] = "";
     });
-    winner.textContent = "";
     updateBoard();
+    //clears winner and popip
+    winner.textContent = "";
     popupToggle();
+    //turns on game
     gameBoard.gameRunning = true;
-    //Changes Player turns each restart
+    //Changes Player turns each restart - Player 1 starts odd turns, player 2 even turn
     if (gameBoard.gameNumber % 2) {
       pOne.turn = true;
       pTwo.turn = false;
@@ -64,10 +67,13 @@ var gameBoard = (function () {
       pTwo.turn = true;
     }
     gameBoard.gameNumber++;
-    aiTurn();
 
+    //highlights current turn
     isPlayerOneTurn();
     isPlayerTwoTurn();
+
+    //AI's turn upon restarting agme, if it turn
+    aiTurn();
   }
 
   function updateBoard() {
@@ -99,17 +105,16 @@ var gameBoard = (function () {
           console.log("Player 1 wins");
           winner.textContent = "Player 1 Wins! Congratulations!";
           pOne.incrementScore();
-        } else {
+        } else if (pTwo.turn === true) {
           console.log("Player 2 wins");
           winner.textContent = "Player 2 Wins! Congratulations!";
           pTwo.incrementScore();
         }
         gameBoard.gameRunning = false;
         popupToggle();
+        clearPlayerHighlights();
         break;
       }
-
-      //updates score if there is a winner
     }
     checkTie();
     playerOneScore.textContent = pOne.score;
@@ -135,6 +140,7 @@ var gameBoard = (function () {
       winner.textContent = "Tie Game!";
       gameBoard.gameRunning = false;
       popupToggle();
+      clearPlayerHighlights();
     }
   }
 
@@ -187,10 +193,14 @@ isPlayerOneTurn();
 isPlayerTwoTurn();
 
 //*********Clear current player's turn *************/
-// function clearPlayerHighlight()
+function clearPlayerHighlights() {
+  playerOne.classList.remove("currentTurn");
+  playerTwo.classList.remove("currentTurn");
+}
 
 //*********Clicking action *************/
 
+//Player 1 click action
 cells.forEach((cell) => {
   cell.addEventListener("click", function (e) {
     const clickedCell = e.target;
@@ -201,20 +211,20 @@ cells.forEach((cell) => {
       gameBoard.gameRunning === true
     ) {
       gameBoard.game.board[i] = "X";
-
-      gameBoard.checkWinner();
       gameBoard.updateBoard();
+      gameBoard.checkWinner();
       pOne.toggleTurn();
       pTwo.toggleTurn();
-      aiTurn();
       isPlayerOneTurn();
       isPlayerTwoTurn();
-      console.log(`player one turn us ${pOne.turn}`);
-      console.log(`player 2 turn us ${pTwo.turn}`);
+      console.log(`player one turn is ${pOne.turn}`);
+      console.log(`player 2 turn is ${pTwo.turn}`);
+      aiTurn();
     }
   });
 });
 
+//Player 2 click action
 cells.forEach((cell) => {
   cell.addEventListener("click", function (e) {
     const clickedCell = e.target;
@@ -258,7 +268,6 @@ function aiTurn() {
       let aiNumber;
       while (true) {
         aiNumber = randomNumber(9);
-        console.log(aiNumber);
         if (
           !gameBoard.game.board[aiNumber] ||
           gameBoard.game.board.every((elem) => elem !== "")
@@ -269,6 +278,7 @@ function aiTurn() {
       gameBoard.game.board[aiNumber] = "0";
       gameBoard.checkWinner();
       gameBoard.updateBoard();
+
       pOne.toggleTurn();
       pTwo.toggleTurn();
       isPlayerOneTurn();
