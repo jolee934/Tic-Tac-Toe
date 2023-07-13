@@ -78,7 +78,11 @@ h4 {
 .bot {
   display: flex;
 }
-/* 
+
+/* highlight the active player*/
+.highlight {
+}
+
 /* popup button */
 .popup_container {
   align-self: center;
@@ -133,7 +137,6 @@ h4 {
   border: none;
   min-width: 240px;
   border-bottom: 2px solid black;
-  border: 2px solid green;
   cursor: pointer;
   box-sizing: border-box;
 }
@@ -144,8 +147,8 @@ h4 {
 }
 
 .difficulty {
-  position: relative;
   display: inline-block;
+  position: relative;
 }
 
 .dropdownMenu {
@@ -154,9 +157,8 @@ h4 {
   min-width: 240px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  border: 2px solid green;
   box-sizing: border-box;
-  top: 0px;
+  top: 10px;
 }
 
 .dropdownMenu li:hover {
