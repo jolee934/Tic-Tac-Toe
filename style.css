@@ -91,7 +91,7 @@ h4 {
 .popup_container {
   align-self: center;
   position: absolute;
-  top: 50%;
+  top: 10%;
   left: 50px;
   transform: translate(-25%, -50%);
 }
@@ -102,7 +102,7 @@ h4 {
   width: 400px;
   height: 100px;
   border: 2px solid grey;
-  background: green;
+  background: rgba(67, 196, 67, 0.24);
 }
 
 .winner {

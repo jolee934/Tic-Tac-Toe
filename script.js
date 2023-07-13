@@ -64,6 +64,10 @@ var gameBoard = (function () {
       pTwo.turn = true;
     }
     gameBoard.gameNumber++;
+    aiTurn();
+
+    isPlayerOneTurn();
+    isPlayerTwoTurn();
   }
 
   function updateBoard() {
@@ -158,15 +162,32 @@ const playerFactory = (score, turn) => {
 };
 
 const pOne = playerFactory(0, true);
-const pTwo = playerFactory(0);
+const pTwo = playerFactory(0, false);
 
-if (pOne.turn === true) {
-  playerOne.classList.toggle("currentTurn");
+//*********Toggle current player's turn *************/
+function isPlayerOneTurn() {
+  if (pOne.turn === true) {
+    playerOne.classList.add("currentTurn");
+  }
+  if (pOne.turn === false) {
+    playerOne.classList.remove("currentTurn");
+  }
 }
 
-if (pTwo.turn === true) {
-  playerTwo.classList.toggle("currentTurn");
+function isPlayerTwoTurn() {
+  if (pTwo.turn === true) {
+    playerTwo.classList.add("currentTurn");
+  }
+  if (pTwo.turn === false) {
+    playerTwo.classList.remove("currentTurn");
+  }
 }
+
+isPlayerOneTurn();
+isPlayerTwoTurn();
+
+//*********Clear current player's turn *************/
+// function clearPlayerHighlight()
 
 //*********Clicking action *************/
 
@@ -180,13 +201,16 @@ cells.forEach((cell) => {
       gameBoard.gameRunning === true
     ) {
       gameBoard.game.board[i] = "X";
-      gameBoard.checkWinner();
 
+      gameBoard.checkWinner();
       gameBoard.updateBoard();
       pOne.toggleTurn();
+      pTwo.toggleTurn();
       aiTurn();
-      playerOne.classList.toggle("currentTurn");
-      playerTwo.classList.toggle("currentTurn");
+      isPlayerOneTurn();
+      isPlayerTwoTurn();
+      console.log(`player one turn us ${pOne.turn}`);
+      console.log(`player 2 turn us ${pTwo.turn}`);
     }
   });
 });
@@ -198,15 +222,17 @@ cells.forEach((cell) => {
     if (
       gameBoard.game.board[i] === "" &&
       pOne.turn === false &&
-      gameBoard.gameRunning === true
+      gameBoard.gameRunning === true &&
+      ai === false
     ) {
       gameBoard.game.board[i] = "0";
       gameBoard.checkWinner();
 
       gameBoard.updateBoard();
       pOne.toggleTurn();
-      playerOne.classList.toggle("currentTurn");
-      playerTwo.classList.toggle("currentTurn");
+      pTwo.toggleTurn();
+      isPlayerOneTurn();
+      isPlayerTwoTurn();
     }
   });
 });
@@ -227,17 +253,31 @@ dropdownToggle.addEventListener("click", function () {
 //****************AI Mechanic *******************/
 
 function aiTurn() {
-  if (pOne.turn === false && ai === true) {
-    gameBoard.game.board[5] = "0";
-    gameBoard.checkWinner();
-    gameBoard.updateBoard();
-    pOne.toggleTurn();
-    playerOne.classList.toggle("currentTurn");
-    playerTwo.classList.toggle("currentTurn");
+  if (pOne.turn === false && ai === true && gameBoard.gameRunning === true) {
+    setTimeout(function () {
+      let aiNumber;
+      while (true) {
+        aiNumber = randomNumber(9);
+        console.log(aiNumber);
+        if (
+          !gameBoard.game.board[aiNumber] ||
+          gameBoard.game.board.every((elem) => elem !== "")
+        ) {
+          break;
+        }
+      }
+      gameBoard.game.board[aiNumber] = "0";
+      gameBoard.checkWinner();
+      gameBoard.updateBoard();
+      pOne.toggleTurn();
+      pTwo.toggleTurn();
+      isPlayerOneTurn();
+      isPlayerTwoTurn();
+    }, 1000);
   }
 }
 
+//****************Random number generator for first pick of AI*******************/
 function randomNumber(max) {
   return Math.floor(Math.random() * max);
 }
-console.log(randomNumber(9));
