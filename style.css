@@ -118,7 +118,7 @@ h4 {
   max-height: 35px;
 }
 
-/*toggle hidden on and off*/
+/* toggle hidden on and off*/
 /* .hidden {
   display: none;
 } */
@@ -133,6 +133,11 @@ h4 {
   border: none;
   min-width: 240px;
   border-bottom: 2px solid black;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  background-color: blue;
 }
 
 .difficulty .dropdownMenu {
