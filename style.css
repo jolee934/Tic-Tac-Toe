@@ -78,7 +78,7 @@ h4 {
 .bot {
   display: flex;
 }
-
+/* 
 /* popup button */
 .popup_container {
   align-self: center;
@@ -133,17 +133,32 @@ h4 {
   border: none;
   min-width: 240px;
   border-bottom: 2px solid black;
+  border: 2px solid green;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
-.dropbtn:hover {
-  background-color: blue;
+.dropdownbtn:hover,
+.dropdownbtn:focus {
+  background-color: rgba(189, 207, 209, 0.664);
 }
 
-.difficulty .dropdownMenu {
-  display: none;
+.difficulty {
+  position: relative;
+  display: inline-block;
 }
 
-.difficulty.open .dropdownMenu {
-  display: block;
+.dropdownMenu {
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 240px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border: 2px solid green;
+  box-sizing: border-box;
+  top: 0px;
+}
+
+.dropdownMenu li:hover {
+  color: red;
 }
