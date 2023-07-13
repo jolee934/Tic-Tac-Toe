@@ -55,6 +55,9 @@ h3 {
   padding-left: 23px;
 }
 
+
+.player
+
 .tie_score {
   padding-left: 10px;
 }
@@ -123,9 +126,9 @@ h4 {
 }
 
 /* toggle hidden on and off*/
-/* .hidden {
+.hidden {
   display: none;
-} */
+}
 
 /*Dropdown menu for difficulty*/
 

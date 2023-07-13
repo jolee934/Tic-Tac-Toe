@@ -200,6 +200,5 @@ function popupToggle() {
 
 //*********Difficulty drop down menu *************/
 dropdownToggle.addEventListener("click", function () {
-  dropdownMenu.style.display =
-    dropdownMenu.style.display === "none" ? "block" : "none";
+  dropdownMenu.classList.toggle("hidden");
 });
