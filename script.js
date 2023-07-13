@@ -13,11 +13,23 @@ const difficultyButton = document.querySelector(".difficulty");
 const cells = document.querySelectorAll(".cell");
 const playerOneScore = document.querySelector(".player1_score");
 const playerTwoScore = document.querySelector(".player2_score");
+const playerOne = document.querySelector(".player_1");
+const playerTwo = document.querySelector(".player_2");
 const tieScore = document.querySelector(".tie_score");
 const winner = document.querySelector(".winner");
 const popup = document.querySelector(".popup");
 const dropdownToggle = document.querySelector(".dropdownbtn");
 const dropdownMenu = document.querySelector(".dropdownMenu");
+
+let cellNumber = [];
+for (let i = 0; i <= 8; i++) {
+  let number = document.querySelector(`[data-index="${i}"]`);
+  cellNumber.push(number);
+}
+
+//*********Initialize game *************/
+let ai = true;
+let twoPlayer = false;
 
 //*********Game Board Module *************/
 var gameBoard = (function () {
@@ -142,15 +154,19 @@ const playerFactory = (score, turn) => {
     this.turn = !this.turn;
   };
 
-  const isTurn = () => {
-    return turn;
-  };
-
-  return { turn, isTurn, score, toggleTurn, incrementScore };
+  return { turn, score, toggleTurn, incrementScore };
 };
 
 const pOne = playerFactory(0, true);
 const pTwo = playerFactory(0);
+
+if (pOne.turn === true) {
+  playerOne.classList.toggle("currentTurn");
+}
+
+if (pTwo.turn === true) {
+  playerTwo.classList.toggle("currentTurn");
+}
 
 //*********Clicking action *************/
 
@@ -168,6 +184,9 @@ cells.forEach((cell) => {
 
       gameBoard.updateBoard();
       pOne.toggleTurn();
+      aiTurn();
+      playerOne.classList.toggle("currentTurn");
+      playerTwo.classList.toggle("currentTurn");
     }
   });
 });
@@ -186,6 +205,8 @@ cells.forEach((cell) => {
 
       gameBoard.updateBoard();
       pOne.toggleTurn();
+      playerOne.classList.toggle("currentTurn");
+      playerTwo.classList.toggle("currentTurn");
     }
   });
 });
@@ -202,3 +223,21 @@ function popupToggle() {
 dropdownToggle.addEventListener("click", function () {
   dropdownMenu.classList.toggle("hidden");
 });
+
+//****************AI Mechanic *******************/
+
+function aiTurn() {
+  if (pOne.turn === false && ai === true) {
+    gameBoard.game.board[5] = "0";
+    gameBoard.checkWinner();
+    gameBoard.updateBoard();
+    pOne.toggleTurn();
+    playerOne.classList.toggle("currentTurn");
+    playerTwo.classList.toggle("currentTurn");
+  }
+}
+
+function randomNumber(max) {
+  return Math.floor(Math.random() * max);
+}
+console.log(randomNumber(9));

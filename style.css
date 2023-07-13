@@ -55,8 +55,9 @@ h3 {
   padding-left: 23px;
 }
 
-
-.player
+.currentTurn {
+  text-shadow: 2px 2px 3px rgb(255, 148, 77);
+}
 
 .tie_score {
   padding-left: 10px;
