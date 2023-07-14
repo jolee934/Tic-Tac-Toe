@@ -33,6 +33,10 @@ let ai = true;
 // let twoPlayer = false;
 // gameDisplay.classList.toggle("hidden");
 
+let easy = false;
+let medium = false;
+let hard = false;
+
 //*********Game Board Module *************/
 var gameBoard = (function () {
   const game = {
@@ -270,8 +274,21 @@ function aiTurn() {
   if (pOne.turn === false && ai === true && gameBoard.gameRunning === true) {
     setTimeout(function () {
       let aiNumber;
-      defend();
       while (true) {
+        if (hard === true) {
+          const c = finishingMove();
+          if (c || c === 0) {
+            aiNumber = c;
+            break;
+          }
+        }
+        if (medium === true || hard === true) {
+          const c = defend();
+          if (c || c === 0) {
+            aiNumber = c;
+            break;
+          }
+        }
         aiNumber = randomNumber(9);
         if (
           !gameBoard.game.board[aiNumber] ||
@@ -296,28 +313,77 @@ function aiTurn() {
 }
 
 function defend() {
-  const winningNumbers = [
+  const defense = [
     [0, 1, 2],
     [1, 2, 0],
+    [2, 0, 1],
     [3, 4, 5],
     [4, 5, 3],
+    [3, 5, 4],
     [6, 7, 8],
     [7, 8, 6],
-    [0, 3, 6],
+    [6, 8, 7],
     [3, 6, 0],
+    [0, 3, 6],
     [1, 4, 7],
     [4, 7, 1],
     [2, 5, 8],
+    [2, 8, 5],
+    [5, 8, 2],
     [0, 4, 8],
     [2, 4, 6],
     [6, 4, 2],
     [4, 8, 0],
   ];
-  for (const x of winningNumbers) {
+  for (const x of defense) {
     const [a, b, c] = x;
-    if (gameBoard.game.board[a] === "X" && gameBoard.game.board[b] === "X") {
-      console.log("defent");
-      gameBoard.game.board[c] = "0";
+    if (
+      gameBoard.game.board[a] === "X" &&
+      gameBoard.game.board[b] === "X" &&
+      !gameBoard.game.board[c]
+    ) {
+      console.log("defend");
+      return c;
+    }
+  }
+}
+
+function finishingMove() {
+  const aboutToWin = [
+    [0, 1, 2],
+    [2, 1, 0],
+    [2, 0, 1],
+    [3, 4, 5],
+    [5, 4, 3],
+    [3, 5, 4],
+    [6, 7, 8],
+    [8, 7, 6],
+    [8, 6, 7],
+    [0, 3, 6],
+    [0, 6, 3],
+    [6, 3, 0],
+    [1, 4, 7],
+    [7, 4, 1],
+    [1, 7, 4],
+    [2, 5, 8],
+    [8, 5, 2],
+    [8, 2, 5],
+    [0, 4, 8],
+    [8, 4, 0],
+    [8, 0, 4],
+    [2, 4, 6],
+    [6, 4, 2],
+    [6, 2, 4],
+  ];
+  for (x of aboutToWin) {
+    const [a, b, c] = x;
+    if (
+      gameBoard.game.board[a] === "0" &&
+      gameBoard.game.board[b] === "0" &&
+      !gameBoard.game.board[c]
+    ) {
+      console.log("attack");
+      return c;
     }
   }
 }
