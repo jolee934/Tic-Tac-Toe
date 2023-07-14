@@ -20,6 +20,7 @@ const winner = document.querySelector(".winner");
 const popup = document.querySelector(".popup");
 const dropdownToggle = document.querySelector(".dropdownbtn");
 const dropdownMenu = document.querySelector(".dropdownMenu");
+const gameDisplay = document.querySelector(".game_display");
 
 let cellNumber = [];
 for (let i = 0; i <= 8; i++) {
@@ -29,7 +30,8 @@ for (let i = 0; i <= 8; i++) {
 
 //*********Initialize game *************/
 let ai = true;
-let twoPlayer = false;
+// let twoPlayer = false;
+// gameDisplay.classList.toggle("hidden");
 
 //*********Game Board Module *************/
 var gameBoard = (function () {
@@ -220,6 +222,9 @@ cells.forEach((cell) => {
       console.log(`player one turn is ${pOne.turn}`);
       console.log(`player 2 turn is ${pTwo.turn}`);
       aiTurn();
+      if (gameBoard.gameRunning === false) {
+        clearPlayerHighlights();
+      }
     }
   });
 });
@@ -237,7 +242,6 @@ cells.forEach((cell) => {
     ) {
       gameBoard.game.board[i] = "0";
       gameBoard.checkWinner();
-
       gameBoard.updateBoard();
       pOne.toggleTurn();
       pTwo.toggleTurn();
@@ -266,6 +270,7 @@ function aiTurn() {
   if (pOne.turn === false && ai === true && gameBoard.gameRunning === true) {
     setTimeout(function () {
       let aiNumber;
+      defend();
       while (true) {
         aiNumber = randomNumber(9);
         if (
@@ -283,7 +288,37 @@ function aiTurn() {
       pTwo.toggleTurn();
       isPlayerOneTurn();
       isPlayerTwoTurn();
+      if (gameBoard.gameRunning === false) {
+        clearPlayerHighlights();
+      }
     }, 1000);
+  }
+}
+
+function defend() {
+  const winningNumbers = [
+    [0, 1, 2],
+    [1, 2, 0],
+    [3, 4, 5],
+    [4, 5, 3],
+    [6, 7, 8],
+    [7, 8, 6],
+    [0, 3, 6],
+    [3, 6, 0],
+    [1, 4, 7],
+    [4, 7, 1],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+    [6, 4, 2],
+    [4, 8, 0],
+  ];
+  for (const x of winningNumbers) {
+    const [a, b, c] = x;
+    if (gameBoard.game.board[a] === "X" && gameBoard.game.board[b] === "X") {
+      console.log("defent");
+      gameBoard.game.board[c] = "0";
+    }
   }
 }
 

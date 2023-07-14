@@ -15,6 +15,11 @@ h1 {
   text-align: center;
 }
 
+.game_display {
+  display: flex;
+  flex-direction: column;
+}
+
 /*Difficulty and back button */
 h2 {
   display: flex;

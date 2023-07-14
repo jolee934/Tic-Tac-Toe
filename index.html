@@ -9,59 +9,60 @@
   </head>
   <body>
     <h1><div class="title">Tic Tac Toe</div></h1>
-    <h2>
-      <div class="difficulty">
-        <button class="dropdownbtn">Difficulty</button>
-        <ul class="dropdownMenu hidden">
-          <li>Regular</li>
-          <li>Undefeatable</li>
-        </ul>
-      </div>
+    <div class="game_display">
+      <h2>
+        <div class="difficulty">
+          <button class="dropdownbtn">Difficulty</button>
+          <ul class="dropdownMenu hidden">
+            <li>Regular</li>
+            <li>Undefeatable</li>
+          </ul>
+        </div>
 
-      <button class="back">Back</button>
-    </h2>
-    <h3>
-      <div class="score">Score</div>
-      <div class="player_container">
-        <div class="p1_container">
-          <div class="player_1">Player 1</div>
-          <div class="player1_score">0</div>
+        <button class="back">Back</button>
+      </h2>
+      <h3>
+        <div class="score">Score</div>
+        <div class="player_container">
+          <div class="p1_container">
+            <div class="player_1">Player 1</div>
+            <div class="player1_score">0</div>
+          </div>
+          <div class="tie_container">
+            <div class="tie">Tie</div>
+            <div class="tie_score">0</div>
+          </div>
+          <div class="p2_container">
+            <div class="player_2">Player 2</div>
+            <div class="player2_score">0</div>
+          </div>
         </div>
-        <div class="tie_container">
-          <div class="tie">Tie</div>
-          <div class="tie_score">0</div>
+      </h3>
+      <h4>
+        <div class="top board">
+          <div class="top_a cell" data-index="0"></div>
+          <div class="top_b cell" data-index="1"></div>
+          <div class="top_c cell" data-index="2"></div>
         </div>
-        <div class="p2_container">
-          <div class="player_2">Player 2</div>
-          <div class="player2_score">0</div>
+        <div class="mid board">
+          <div class="mid_a cell" data-index="3"></div>
+          <div class="mid_b cell" data-index="4"></div>
+          <div class="mid_c cell" data-index="5"></div>
         </div>
-      </div>
-    </h3>
-    <h4>
-      <div class="top board">
-        <div class="top_a cell" data-index="0"></div>
-        <div class="top_b cell" data-index="1"></div>
-        <div class="top_c cell" data-index="2"></div>
-      </div>
-      <div class="mid board">
-        <div class="mid_a cell" data-index="3"></div>
-        <div class="mid_b cell" data-index="4"></div>
-        <div class="mid_c cell" data-index="5"></div>
-      </div>
-      <div class="bot board">
-        <div class="bot_a cell" data-index="6"></div>
-        <div class="bot_b cell" data-index="7"></div>
-        <div class="bot_c cell" data-index="8"></div>
-      </div>
-      <div class="popup_container">
-        <div class="popup hidden">
-          <div class="winner">Player wins!</div>
-          <button class="back">Back to Title Screen</button>
-          <button class="continue">Continue playing</button>
+        <div class="bot board">
+          <div class="bot_a cell" data-index="6"></div>
+          <div class="bot_b cell" data-index="7"></div>
+          <div class="bot_c cell" data-index="8"></div>
         </div>
-      </div>
-    </h4>
-
+        <div class="popup_container">
+          <div class="popup hidden">
+            <div class="winner">Player wins!</div>
+            <button class="back">Back to Title Screen</button>
+            <button class="continue">Continue playing</button>
+          </div>
+        </div>
+      </h4>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
