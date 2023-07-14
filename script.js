@@ -21,6 +21,9 @@ const popup = document.querySelector(".popup");
 const dropdownToggle = document.querySelector(".dropdownbtn");
 const dropdownMenu = document.querySelector(".dropdownMenu");
 const gameDisplay = document.querySelector(".game_display");
+const easyBtn = document.getElementById("easy");
+const medBtn = document.getElementById("medium");
+const hardBtn = document.getElementById("hard");
 
 let cellNumber = [];
 for (let i = 0; i <= 8; i++) {
@@ -265,6 +268,34 @@ function popupToggle() {
 
 //*********Difficulty drop down menu *************/
 dropdownToggle.addEventListener("click", function () {
+  dropdownMenu.classList.toggle("hidden");
+});
+
+//*********Select difficulty *************/
+easyBtn.addEventListener("click", function () {
+  easy = true;
+  medium = false;
+  hard = false;
+  console.log(easy, medium, hard);
+  dropdownToggle.textContent = "Easy";
+  dropdownMenu.classList.toggle("hidden");
+});
+
+medBtn.addEventListener("click", function () {
+  easy = false;
+  medium = true;
+  hard = false;
+  console.log(easy, medium, hard);
+  dropdownToggle.textContent = "Medium";
+  dropdownMenu.classList.toggle("hidden");
+});
+
+hardBtn.addEventListener("click", function () {
+  easy = false;
+  medium = false;
+  hard = true;
+  console.log(easy, medium, hard);
+  dropdownToggle.textContent = "Hard";
   dropdownMenu.classList.toggle("hidden");
 });
 

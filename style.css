@@ -4,6 +4,8 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0px;
+  background-color: rgba(241, 178, 105, 0.466);
+  background-size: 200%;
 }
 
 h1 {
@@ -25,13 +27,19 @@ h1 {
 /*Difficulty and back button */
 h2 {
   display: flex;
-  align-self: center;
+  justify-content: space-between;
+  /* align-self: center; */
 }
 
-.difficulty,
+.difficulty {
+  margin-left: 140px;
+  margin-right: 60px;
+}
+
 .back {
-  margin-left: 40px;
-  margin-right: 40px;
+  width: 80px;
+  max-height: 35px;
+  margin-right: 140px;
 }
 
 .score {
@@ -75,13 +83,43 @@ h3 {
 h4 {
   position: relative;
   align-self: center;
-  border: solid 2px yellow;
 }
 
 .cell {
-  border: solid 2px red;
   width: 100px;
   height: 100px;
+}
+
+.cell[data-index="0"] {
+  border-bottom: solid 2px rgb(233, 133, 51);
+}
+.cell[data-index="1"] {
+  border-left: solid 2px rgb(233, 133, 51);
+  border-right: solid 2px rgb(233, 133, 51);
+  border-bottom: solid 2px rgb(233, 133, 51);
+}
+
+.cell[data-index="2"] {
+  border-bottom: solid 2px rgb(233, 133, 51);
+}
+.cell[data-index="3"] {
+  border-right: solid 2px rgb(233, 133, 51);
+}
+
+.cell[data-index="5"] {
+  border-left: solid 2px rgb(233, 133, 51);
+}
+
+.cell[data-index="6"] {
+  border-top: solid 2px rgb(233, 133, 51);
+  border-right: solid 2px rgb(233, 133, 51);
+}
+.cell[data-index="7"] {
+  border-top: solid 2px rgb(233, 133, 51);
+}
+.cell[data-index="8"] {
+  border-top: solid 2px rgb(233, 133, 51);
+  border-left: solid 2px rgb(233, 133, 51);
 }
 
 .top,
@@ -126,12 +164,6 @@ h4 {
   width: 120px;
   max-height: 35px;
 }
-.back {
-  grid-column-start: 3;
-  grid-row-start: 2;
-  width: 120px;
-  max-height: 35px;
-}
 
 /* toggle hidden on and off*/
 .hidden {
@@ -143,10 +175,10 @@ h4 {
 .dropdownbtn {
   background-color: none;
   color: black;
-  font-size: 25px;
+  font-size: 15px;
   box-shadow: none;
   border: none;
-  min-width: 240px;
+  min-width: 120px;
   border-bottom: 2px solid black;
   cursor: pointer;
   box-sizing: border-box;
@@ -165,13 +197,22 @@ h4 {
 .dropdownMenu {
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 240px;
+  font-size: 15px;
+  padding: 0px;
+  min-width: 120px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   box-sizing: border-box;
-  top: 10px;
+  top: 12px;
 }
 
-.dropdownMenu li:hover {
-  color: red;
+.options:hover {
+  color: rgb(243, 156, 56);
+  background-color: rgba(196, 191, 191, 0.473);
+}
+
+.options {
+  padding: 0px;
+  margin: 0px;
+  height: 22px;
 }
