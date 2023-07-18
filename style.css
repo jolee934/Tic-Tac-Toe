@@ -26,6 +26,58 @@ h1 {
   padding: 0px;
 }
 
+/*Title Screen*/
+
+.title_screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question {
+  font-size: 20px;
+}
+
+.human_robot {
+  display: grid;
+  grid-template: 80px 40px 40px 40px 20px 40px/ 60px 60px 60px 60px 60px 60px 60px;
+}
+
+.human {
+  max-width: 124px;
+  grid-column-start: 2;
+}
+.robot {
+  max-width: 130px;
+  grid-column-start: 5;
+}
+
+.human_btn {
+  grid-column-start: 2;
+  grid-column-end: span 2;
+  grid-row-start: 4;
+}
+
+.robot_btn {
+  grid-column-start: 5;
+  grid-column-end: span 2;
+  grid-row-start: 4;
+}
+
+.title_difficulty {
+  grid-column-start: 5;
+  grid-row-start: 6;
+}
+
+.start {
+  width: 200px;
+  margin-top: 70px;
+}
+
+.clicked {
+  background-color: rgba(196, 191, 191, 0.473);
+}
+
 /*Difficulty and back button */
 h2 {
   display: flex;
@@ -137,7 +189,6 @@ h4 {
 
 /* popup button */
 .popup_container {
-  display: flex;
   align-self: center;
   position: absolute;
   top: 10%;
@@ -187,7 +238,8 @@ h4 {
 
 /*Dropdown menu for difficulty*/
 
-.dropdownbtn {
+.dropdownbtn,
+.title_dropdownbtn {
   background-color: none;
   color: black;
   font-size: 15px;
@@ -199,17 +251,21 @@ h4 {
   box-sizing: border-box;
 }
 
-.dropdownbtn:hover,
-.dropdownbtn:focus {
+.dropdownbtn,
+.title_dropdownbtn:hover,
+.dropdownbtn,
+.title_dropdownbtn:focus {
   background-color: rgba(189, 207, 209, 0.664);
 }
 
-.difficulty {
+.difficulty,
+.title_difficulty {
   display: inline-block;
   position: relative;
 }
 
-.dropdownMenu {
+.dropdownMenu,
+.title_dropdownMenu {
   position: absolute;
   background-color: #f1f1f1;
   font-size: 15px;
@@ -218,7 +274,7 @@ h4 {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   box-sizing: border-box;
-  top: 12px;
+  top: 6px;
 }
 
 .options:hover {

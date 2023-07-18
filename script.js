@@ -18,8 +18,12 @@ const playerTwo = document.querySelector(".player_2");
 const tieScore = document.querySelector(".tie_score");
 const winner = document.querySelector(".winner");
 const popup = document.querySelector(".popup");
-const dropdownToggle = document.querySelector(".dropdownbtn");
+const dropdownBtn = document.querySelector(".dropdownbtn");
 const dropdownMenu = document.querySelector(".dropdownMenu");
+const titleDropdownBtn = document.querySelector(".title_dropdownbtn");
+const titleDropdownMenu = document.querySelector(".title_dropdownMenu");
+const robotBtn = document.querySelector(".robot_btn");
+const humanBtn = document.querySelector(".human_btn");
 const gameDisplay = document.querySelector(".game_display");
 const easyBtn = document.getElementById("easy");
 const medBtn = document.getElementById("medium");
@@ -31,6 +35,18 @@ for (let i = 0; i <= 8; i++) {
   let number = document.querySelector(`[data-index="${i}"]`);
   cellNumber.push(number);
 }
+
+//*********Tile screen*************/
+
+robotBtn.addEventListener("click", function () {
+  titleDropdownBtn.classList.toggle("hidden");
+  robotBtn.classList.toggle("clicked");
+});
+
+humanBtn.addEventListener("click", function () {
+  titleDropdownBtn.classList.toggle("hidden");
+  humanBtn.classList.toggle("clicked");
+});
 
 //*********Initialize game *************/
 let ai = true;
@@ -270,8 +286,12 @@ function popupToggle() {
 }
 
 //*********Difficulty drop down menu *************/
-dropdownToggle.addEventListener("click", function () {
+dropdownBtn.addEventListener("click", function () {
   dropdownMenu.classList.toggle("hidden");
+});
+
+titleDropdownBtn.addEventListener("click", function () {
+  titleDropdownMenu.classList.toggle("hidden");
 });
 
 //*********Select difficulty *************/
@@ -280,8 +300,10 @@ easyBtn.addEventListener("click", function () {
   medium = false;
   hard = false;
 
-  dropdownToggle.textContent = "Easy";
+  dropdownBtn.textContent = "Easy";
   dropdownMenu.classList.toggle("hidden");
+  titleDropdownBtn.textContent = "Easy";
+  titleDropdownMenu.classList.toggle("hidden");
 });
 
 medBtn.addEventListener("click", function () {
@@ -289,8 +311,10 @@ medBtn.addEventListener("click", function () {
   medium = true;
   hard = false;
 
-  dropdownToggle.textContent = "Medium";
+  dropdownBtn.textContent = "Medium";
   dropdownMenu.classList.toggle("hidden");
+  titleDropdownBtn.textContent = "Medium";
+  titleDropdownMenu.classList.toggle("hidden");
 });
 
 hardBtn.addEventListener("click", function () {
@@ -298,8 +322,10 @@ hardBtn.addEventListener("click", function () {
   medium = false;
   hard = true;
 
-  dropdownToggle.textContent = "Hard";
+  dropdownBtn.textContent = "Hard";
   dropdownMenu.classList.toggle("hidden");
+  titleDropdownBtn.textContent = "Hard";
+  titleDropdownMenu.classList.toggle("hidden");
 });
 
 //****************AI Mechanic *******************/
