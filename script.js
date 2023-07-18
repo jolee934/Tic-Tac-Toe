@@ -1,12 +1,20 @@
-const topA = document.querySelector(".top_a");
-const topB = document.querySelector(".top_b");
-const topC = document.querySelector(".top_c");
-const midA = document.querySelector(".mid_a");
-const midB = document.querySelector(".mid_b");
-const midC = document.querySelector(".mid_c");
-const botA = document.querySelector(".bot_a");
-const botB = document.querySelector(".bot_b");
-const botC = document.querySelector(".bot_c");
+//Board
+// const topA = document.querySelector(".top_a");
+// const topB = document.querySelector(".top_b");
+// const topC = document.querySelector(".top_c");
+// const midA = document.querySelector(".mid_a");
+// const midB = document.querySelector(".mid_b");
+// const midC = document.querySelector(".mid_c");
+// const botA = document.querySelector(".bot_a");
+// const botB = document.querySelector(".bot_b");
+// const botC = document.querySelector(".bot_c");
+//Doms for the Board: Data attribute for each cell
+let cellNumber = [];
+for (let i = 0; i <= 8; i++) {
+  let number = document.querySelector(`[data-index="${i}"]`);
+  cellNumber.push(number);
+}
+
 const restartButton = document.querySelector(".continue");
 const backButton = document.querySelector(".back");
 const difficultyButton = document.querySelector(".difficulty");
@@ -25,19 +33,13 @@ const titleDropdownMenu = document.querySelector(".title_dropdownMenu");
 const robotBtn = document.querySelector(".robot_btn");
 const humanBtn = document.querySelector(".human_btn");
 const startBtn = document.querySelector(".start");
-const error = document.querySelector(".error");
+const message = document.querySelector(".message");
 const titleScreen = document.querySelector(".title_screen");
 const gameDisplay = document.querySelector(".game_display");
 const easyBtn = document.getElementById("easy");
 const medBtn = document.getElementById("medium");
 const hardBtn = document.getElementById("hard");
 const body = document.querySelector("body");
-
-let cellNumber = [];
-for (let i = 0; i <= 8; i++) {
-  let number = document.querySelector(`[data-index="${i}"]`);
-  cellNumber.push(number);
-}
 
 //*********Initialize game *************/
 let ai = true;
@@ -54,6 +56,7 @@ robotBtn.addEventListener("click", function () {
   robotBtn.classList.add("clicked");
   humanBtn.classList.remove("clicked");
   startBtn.classList.remove("hidden");
+  message.classList.remove("hidden");
   ai = true;
 });
 
@@ -62,12 +65,20 @@ humanBtn.addEventListener("click", function () {
   humanBtn.classList.add("clicked");
   robotBtn.classList.remove("clicked");
   startBtn.classList.remove("hidden");
+  message.classList.add("hidden");
   ai = false;
 });
 
 startBtn.addEventListener("click", function () {
-  titleScreen.classList.add("hidden");
-  gameDisplay.classList.remove("hidden");
+  if (
+    ai === false ||
+    (ai === true && (easy === true || medium === true || hard === true))
+  ) {
+    titleScreen.classList.add("hidden");
+    gameDisplay.classList.remove("hidden");
+  } else {
+    message.classList.add("error");
+  }
 });
 
 //*********Game Board Module *************/

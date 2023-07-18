@@ -71,7 +71,11 @@ h1 {
 
 .start {
   width: 200px;
-  margin-top: 70px;
+  margin-top: 40px;
+}
+
+.error {
+  color: red;
 }
 
 .clicked {
