@@ -24,6 +24,9 @@ const titleDropdownBtn = document.querySelector(".title_dropdownbtn");
 const titleDropdownMenu = document.querySelector(".title_dropdownMenu");
 const robotBtn = document.querySelector(".robot_btn");
 const humanBtn = document.querySelector(".human_btn");
+const startBtn = document.querySelector(".start");
+const error = document.querySelector(".error");
+const titleScreen = document.querySelector(".title_screen");
 const gameDisplay = document.querySelector(".game_display");
 const easyBtn = document.getElementById("easy");
 const medBtn = document.getElementById("medium");
@@ -36,26 +39,36 @@ for (let i = 0; i <= 8; i++) {
   cellNumber.push(number);
 }
 
-//*********Tile screen*************/
-
-robotBtn.addEventListener("click", function () {
-  titleDropdownBtn.classList.toggle("hidden");
-  robotBtn.classList.toggle("clicked");
-});
-
-humanBtn.addEventListener("click", function () {
-  titleDropdownBtn.classList.toggle("hidden");
-  humanBtn.classList.toggle("clicked");
-});
-
 //*********Initialize game *************/
 let ai = true;
-let twoPlayer = false;
-gameDisplay.classList.toggle("hidden");
+gameDisplay.classList.add("hidden");
 
 let easy = false;
 let medium = false;
 let hard = false;
+
+//*********Tile screen*************/
+
+robotBtn.addEventListener("click", function () {
+  titleDropdownBtn.classList.remove("hidden");
+  robotBtn.classList.add("clicked");
+  humanBtn.classList.remove("clicked");
+  startBtn.classList.remove("hidden");
+  ai = true;
+});
+
+humanBtn.addEventListener("click", function () {
+  titleDropdownBtn.classList.add("hidden");
+  humanBtn.classList.add("clicked");
+  robotBtn.classList.remove("clicked");
+  startBtn.classList.remove("hidden");
+  ai = false;
+});
+
+startBtn.addEventListener("click", function () {
+  titleScreen.classList.add("hidden");
+  gameDisplay.classList.remove("hidden");
+});
 
 //*********Game Board Module *************/
 var gameBoard = (function () {
