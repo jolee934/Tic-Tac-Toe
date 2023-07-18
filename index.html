@@ -8,7 +8,26 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1><div class="title">Tic Tac Toe</div></h1>
+    <h1>
+      <div class="title">Tic Tac Toe</div>
+    </h1>
+    <div class="title_screen">
+      <p>Would you like to play against computer or human?</p>
+      <img class="human" src="img/human.png" alt="human" />
+      <button class="human">Human</button>
+      <img class="robot" src="img/robot.png" alt="robot" />
+      <button class="computer">Computer</button>
+      <div class="difficulty">
+        <button class="dropdownbtn">Difficulty</button>
+        <ul class="dropdownMenu hidden">
+          <p class="options" id="easy">Easy</p>
+          <p class="options" id="medium">Medium</p>
+          <p class="options" id="hard">Hard</p>
+        </ul>
+      </div>
+      <button class="start">Start</button>
+    </div>
+
     <div class="game_display">
       <h2>
         <div class="difficulty">
