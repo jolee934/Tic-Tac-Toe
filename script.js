@@ -18,6 +18,7 @@ const cells = document.querySelectorAll(".cell");
 const body = document.querySelector("body");
 const gameDisplay = document.querySelector(".game_display");
 
+console.log(cellNumber);
 //*********Initialize game *************/
 let ai = true;
 gameDisplay.classList.add("hidden");
@@ -46,6 +47,7 @@ robotBtn.addEventListener("click", function () {
   humanBtn.classList.remove("clicked");
   startBtn.classList.remove("hidden");
   message.classList.remove("hidden");
+  dropdownBtn.classList.remove("hidden");
   ai = true;
 });
 
@@ -56,6 +58,7 @@ humanBtn.addEventListener("click", function () {
   startBtn.classList.remove("hidden");
   message.classList.add("hidden");
   titleDropdownMenu.classList.add("hidden");
+  dropdownBtn.classList.add("hidden");
   ai = false;
 });
 
@@ -82,6 +85,7 @@ titleEasyBtn.addEventListener("click", function () {
   hard = false;
   titleDropdownBtn.textContent = "Easy";
   titleDropdownMenu.classList.add("hidden");
+  dropdownBtn.textContent = "Easy";
 });
 
 titleMedBtn.addEventListener("click", function () {
@@ -90,6 +94,7 @@ titleMedBtn.addEventListener("click", function () {
   hard = false;
   titleDropdownBtn.textContent = "Medium";
   titleDropdownMenu.classList.add("hidden");
+  dropdownBtn.textContent = "Medium";
 });
 
 titleHardBtn.addEventListener("click", function () {
@@ -98,6 +103,7 @@ titleHardBtn.addEventListener("click", function () {
   hard = true;
   titleDropdownBtn.textContent = "Hard";
   titleDropdownMenu.classList.add("hidden");
+  dropdownBtn.textContent = "Hard";
 });
 
 //*********Game Board Module *************/
@@ -160,6 +166,14 @@ var gameBoard = (function () {
     });
   }
 
+  function createX(n) {
+    const container = document.createElement("div");
+    const img = document.createElement("img");
+    img.src = "img/x.png";
+    container.appendChild(img);
+    cellNumber[2].appendChild(container); // Add the container to the div with data-index="2"
+  }
+
   function checkWinner() {
     const winningNumbers = [
       [0, 1, 2],
@@ -211,7 +225,6 @@ var gameBoard = (function () {
       game.board[8]
     ) {
       tie = tie + 1;
-      console.log("tie game");
       winner.textContent = "Tie Game!";
       gameBoard.gameRunning = false;
       popupToggle();
@@ -227,6 +240,7 @@ var gameBoard = (function () {
     checkWinner: checkWinner,
     game: game,
     gameNumber: gameNumber,
+    createX: createX,
   };
 })();
 
@@ -286,14 +300,13 @@ cells.forEach((cell) => {
       gameBoard.gameRunning === true
     ) {
       gameBoard.game.board[i] = "X";
+      gameBoard.createX(i);
       gameBoard.updateBoard();
       gameBoard.checkWinner();
       pOne.toggleTurn();
       pTwo.toggleTurn();
       isPlayerOneTurn();
       isPlayerTwoTurn();
-      console.log(`player one turn is ${pOne.turn}`);
-      console.log(`player 2 turn is ${pTwo.turn}`);
       aiTurn();
       if (gameBoard.gameRunning === false) {
         clearPlayerHighlights();
@@ -342,12 +355,8 @@ function reset() {
     arr[i] = "";
   });
   gameBoard.updateBoard();
-  console.log(gameBoard.game.board);
-  //clears winner and popip
   winner.textContent = "";
-  //turns on game
   gameBoard.gameRunning = true;
-  //Changes Player turns each restart - Player 1 starts odd turns, player 2 even turn
   gameBoard.gameNumber = 2;
   gameBoard.gameNumber = 0;
   gameBoard.tie = 0;
