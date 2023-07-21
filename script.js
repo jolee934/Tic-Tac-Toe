@@ -17,7 +17,6 @@ for (let i = 0; i <= 8; i++) {
 const cells = document.querySelectorAll(".cell");
 const body = document.querySelector("body");
 const gameDisplay = document.querySelector(".game_display");
-const backButton = document.querySelector(".back");
 
 //*********Initialize game *************/
 let ai = true;
@@ -39,6 +38,7 @@ const titleMedBtn = document.getElementById("title_medium");
 const titleHardBtn = document.getElementById("title_hard");
 const titleScreen = document.querySelector(".title_screen");
 const message = document.querySelector(".message");
+const backButton = document.querySelectorAll(".b_btn");
 
 robotBtn.addEventListener("click", function () {
   titleDropdownBtn.classList.remove("hidden");
@@ -55,6 +55,7 @@ humanBtn.addEventListener("click", function () {
   robotBtn.classList.remove("clicked");
   startBtn.classList.remove("hidden");
   message.classList.add("hidden");
+  titleDropdownMenu.classList.add("hidden");
   ai = false;
 });
 
@@ -69,6 +70,7 @@ startBtn.addEventListener("click", function () {
   ) {
     titleScreen.classList.add("hidden");
     gameDisplay.classList.remove("hidden");
+    message.classList.remove("error");
   } else {
     message.classList.add("error");
   }
@@ -177,11 +179,9 @@ var gameBoard = (function () {
         game.board[a] === game.board[c]
       ) {
         if (pOne.turn === true) {
-          console.log("Player 1 wins");
           winner.textContent = "Player 1 Wins! Congratulations!";
           pOne.incrementScore();
         } else if (pTwo.turn === true) {
-          console.log("Player 2 wins");
           winner.textContent = "Player 2 Wins! Congratulations!";
           pTwo.incrementScore();
         }
@@ -327,6 +327,51 @@ cells.forEach((cell) => {
 //*********Restart game *************/
 const restartButton = document.querySelector(".continue");
 restartButton.addEventListener("click", gameBoard.restartGame);
+
+//*********Reset game with back button*************/
+
+backButton.forEach((x) => {
+  x.addEventListener("click", function () {
+    reset();
+  });
+});
+
+function reset() {
+  //clears the board array
+  gameBoard.game.board.forEach((n, i, arr) => {
+    arr[i] = "";
+  });
+  gameBoard.updateBoard();
+  console.log(gameBoard.game.board);
+  //clears winner and popip
+  winner.textContent = "";
+  //turns on game
+  gameBoard.gameRunning = true;
+  //Changes Player turns each restart - Player 1 starts odd turns, player 2 even turn
+  gameBoard.gameNumber = 2;
+  gameBoard.gameNumber = 0;
+  gameBoard.tie = 0;
+  ai = true;
+  easy = false;
+  medium = false;
+  hard = false;
+  titleDropdownBtn.classList.add("hidden");
+  message.classList.add("hidden");
+  robotBtn.classList.remove("clicked");
+  humanBtn.classList.remove("clicked");
+  popup.classList.remove("blur");
+  popup.classList.add("hidden");
+  gameDisplay.classList.remove("blur");
+  gameDisplay.classList.add("hidden");
+  titleScreen.classList.remove("hidden");
+  titleDropdownBtn.textContent = "Difficulty";
+  startBtn.classList.add("hidden");
+  pOne.score = 0;
+  pTwo.score = 0;
+  playerOneScore.textContent = pOne.score;
+  playerTwoScore.textContent = pTwo.score;
+  tieScore.textContent = gameBoard.tie;
+}
 
 //*********Toggle popup *************/
 function popupToggle() {

@@ -131,7 +131,7 @@ h3 {
 }
 
 .currentTurn {
-  text-shadow: 2px 2px 3px rgb(158, 26, 26);
+  text-shadow: 2px 2px 3px rgb(255, 148, 77);
 }
 
 .tie_score {
@@ -189,6 +189,8 @@ h4 {
 }
 
 /* highlight the active player*/
+.highlight {
+}
 
 /* popup button */
 .popup_container {
