@@ -14,34 +14,10 @@ for (let i = 0; i <= 8; i++) {
   let number = document.querySelector(`[data-index="${i}"]`);
   cellNumber.push(number);
 }
-
-asd;
-
-const restartButton = document.querySelector(".continue");
-const backButton = document.querySelector(".back");
-const difficultyButton = document.querySelector(".difficulty");
 const cells = document.querySelectorAll(".cell");
-const playerOneScore = document.querySelector(".player1_score");
-const playerTwoScore = document.querySelector(".player2_score");
-const playerOne = document.querySelector(".player_1");
-const playerTwo = document.querySelector(".player_2");
-const tieScore = document.querySelector(".tie_score");
-const winner = document.querySelector(".winner");
-const popup = document.querySelector(".popup");
-const dropdownBtn = document.querySelector(".dropdownbtn");
-const dropdownMenu = document.querySelector(".dropdownMenu");
-const titleDropdownBtn = document.querySelector(".title_dropdownbtn");
-const titleDropdownMenu = document.querySelector(".title_dropdownMenu");
-const robotBtn = document.querySelector(".robot_btn");
-const humanBtn = document.querySelector(".human_btn");
-const startBtn = document.querySelector(".start");
-const message = document.querySelector(".message");
-const titleScreen = document.querySelector(".title_screen");
-const gameDisplay = document.querySelector(".game_display");
-const easyBtn = document.getElementById("easy");
-const medBtn = document.getElementById("medium");
-const hardBtn = document.getElementById("hard");
 const body = document.querySelector("body");
+const gameDisplay = document.querySelector(".game_display");
+const backButton = document.querySelector(".back");
 
 //*********Initialize game *************/
 let ai = true;
@@ -52,6 +28,17 @@ let medium = false;
 let hard = false;
 
 //*********Tile screen*************/
+
+const robotBtn = document.querySelector(".robot_btn");
+const humanBtn = document.querySelector(".human_btn");
+const startBtn = document.querySelector(".start");
+const titleDropdownBtn = document.querySelector(".title_dropdownbtn");
+const titleDropdownMenu = document.querySelector(".title_dropdownMenu");
+const titleEasyBtn = document.getElementById("title_easy");
+const titleMedBtn = document.getElementById("title_medium");
+const titleHardBtn = document.getElementById("title_hard");
+const titleScreen = document.querySelector(".title_screen");
+const message = document.querySelector(".message");
 
 robotBtn.addEventListener("click", function () {
   titleDropdownBtn.classList.remove("hidden");
@@ -71,6 +58,10 @@ humanBtn.addEventListener("click", function () {
   ai = false;
 });
 
+titleDropdownBtn.addEventListener("click", function () {
+  titleDropdownMenu.classList.toggle("hidden");
+});
+
 startBtn.addEventListener("click", function () {
   if (
     ai === false ||
@@ -83,7 +74,39 @@ startBtn.addEventListener("click", function () {
   }
 });
 
+titleEasyBtn.addEventListener("click", function () {
+  easy = true;
+  medium = false;
+  hard = false;
+  titleDropdownBtn.textContent = "Easy";
+  titleDropdownMenu.classList.add("hidden");
+});
+
+titleMedBtn.addEventListener("click", function () {
+  easy = false;
+  medium = true;
+  hard = false;
+  titleDropdownBtn.textContent = "Medium";
+  titleDropdownMenu.classList.add("hidden");
+});
+
+titleHardBtn.addEventListener("click", function () {
+  easy = false;
+  medium = false;
+  hard = true;
+  titleDropdownBtn.textContent = "Hard";
+  titleDropdownMenu.classList.add("hidden");
+});
+
 //*********Game Board Module *************/
+const playerOneScore = document.querySelector(".player1_score");
+const playerTwoScore = document.querySelector(".player2_score");
+const playerOne = document.querySelector(".player_1");
+const playerTwo = document.querySelector(".player_2");
+const tieScore = document.querySelector(".tie_score");
+const winner = document.querySelector(".winner");
+const popup = document.querySelector(".popup");
+
 var gameBoard = (function () {
   const game = {
     board: ["", "", "", "", "", "", "", "", ""],
@@ -302,34 +325,36 @@ cells.forEach((cell) => {
 });
 
 //*********Restart game *************/
+const restartButton = document.querySelector(".continue");
 restartButton.addEventListener("click", gameBoard.restartGame);
 
 //*********Toggle popup *************/
 function popupToggle() {
   popup.classList.toggle("hidden");
-  body.classList.toggle("blur");
-  popup.classList.toggle("blur");
+  gameDisplay.classList.toggle("blur");
+  popup.classList.remove("blur");
 }
 
 //*********Difficulty drop down menu *************/
+const dropdownBtn = document.querySelector(".dropdownbtn");
+const dropdownMenu = document.querySelector(".dropdownMenu");
+
 dropdownBtn.addEventListener("click", function () {
   dropdownMenu.classList.toggle("hidden");
 });
 
-titleDropdownBtn.addEventListener("click", function () {
-  titleDropdownMenu.classList.toggle("hidden");
-});
-
 //*********Select difficulty *************/
+const easyBtn = document.getElementById("easy");
+const medBtn = document.getElementById("medium");
+const hardBtn = document.getElementById("hard");
+
 easyBtn.addEventListener("click", function () {
   easy = true;
   medium = false;
   hard = false;
 
   dropdownBtn.textContent = "Easy";
-  dropdownMenu.classList.toggle("hidden");
-  titleDropdownBtn.textContent = "Easy";
-  titleDropdownMenu.classList.toggle("hidden");
+  dropdownMenu.classList.add("hidden");
 });
 
 medBtn.addEventListener("click", function () {
@@ -338,9 +363,7 @@ medBtn.addEventListener("click", function () {
   hard = false;
 
   dropdownBtn.textContent = "Medium";
-  dropdownMenu.classList.toggle("hidden");
-  titleDropdownBtn.textContent = "Medium";
-  titleDropdownMenu.classList.toggle("hidden");
+  dropdownMenu.classList.add("hidden");
 });
 
 hardBtn.addEventListener("click", function () {
@@ -349,9 +372,7 @@ hardBtn.addEventListener("click", function () {
   hard = true;
 
   dropdownBtn.textContent = "Hard";
-  dropdownMenu.classList.toggle("hidden");
-  titleDropdownBtn.textContent = "Hard";
-  titleDropdownMenu.classList.toggle("hidden");
+  dropdownMenu.classList.add("hidden");
 });
 
 //****************AI Mechanic *******************/

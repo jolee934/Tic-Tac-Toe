@@ -2,6 +2,7 @@
 
 body {
   display: flex;
+  position: relative;
   flex-direction: column;
   margin: 0px;
   background-color: #e2a95f86;
@@ -130,7 +131,7 @@ h3 {
 }
 
 .currentTurn {
-  text-shadow: 2px 2px 3px rgb(255, 148, 77);
+  text-shadow: 2px 2px 3px rgb(158, 26, 26);
 }
 
 .tie_score {
@@ -188,16 +189,13 @@ h4 {
 }
 
 /* highlight the active player*/
-.highlight {
-}
 
 /* popup button */
 .popup_container {
-  align-self: center;
   position: absolute;
-  top: 10%;
-  left: 50px;
-  transform: translate(-25%, -50%);
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .popup {
