@@ -15,6 +15,8 @@ for (let i = 0; i <= 8; i++) {
   cellNumber.push(number);
 }
 
+asd;
+
 const restartButton = document.querySelector(".continue");
 const backButton = document.querySelector(".back");
 const difficultyButton = document.querySelector(".difficulty");
