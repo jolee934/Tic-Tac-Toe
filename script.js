@@ -296,13 +296,13 @@ function clearPlayerHighlights() {
   playerTwo.classList.remove("currentTurn");
 }
 
-//*********Clicking action *************/
+//*********Clicking and Hover action *************/
 
-//Player 1 click action
 cells.forEach((cell) => {
+  const i = cell.dataset.index;
   cell.addEventListener("click", function (e) {
     const clickedCell = e.target;
-    const i = cell.dataset.index;
+
     if (
       gameBoard.game.board[i] === "" &&
       pOne.turn === true &&
