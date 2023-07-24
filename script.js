@@ -121,7 +121,7 @@ var gameBoard = (function () {
   };
 
   //use this to turn off the game once someone wins
-  let gameRunning = true;
+  let gameIsRunning = true;
 
   //use this to determine who goes first, based on even/odd numbered game
   let gameNumber = 2;
@@ -136,11 +136,12 @@ var gameBoard = (function () {
       arr[i] = "";
     });
     updateBoard();
+    removeMarker();
     //clears winner and popip
     winner.textContent = "";
     popupToggle();
     //turns on game
-    gameBoard.gameRunning = true;
+    gameBoard.gameIsRunning = true;
     //Changes Player turns each restart - Player 1 starts odd turns, player 2 even turn
     if (gameBoard.gameNumber % 2) {
       pOne.turn = true;
@@ -161,16 +162,23 @@ var gameBoard = (function () {
 
   function createX(n) {
     const div = document.querySelector(`[data-index="${n}"]`);
+    const container = document.createElement("div");
     const img = document.createElement("img");
     img.src = "img/x.png";
+    container.classList.add("marked");
     img.classList.add("markerX");
-    div.appendChild(img);
+    div.appendChild(container);
+    container.appendChild(img);
   }
 
   function updateBoard() {
     cells.forEach((cell) => {
       const i = cell.dataset.index;
-      // if (cell.textConn)
+      console.log(game.board[i]);
+
+      // if (cell.textContent = "") {
+      //
+      // }
       // cell.textContent = game.board[i];
     });
   }
@@ -200,7 +208,7 @@ var gameBoard = (function () {
           winner.textContent = "Player 2 Wins! Congratulations!";
           pTwo.incrementScore();
         }
-        gameBoard.gameRunning = false;
+        gameBoard.gameIsRunning = false;
         popupToggle();
         clearPlayerHighlights();
         break;
@@ -214,7 +222,7 @@ var gameBoard = (function () {
 
   function checkTie() {
     if (
-      gameBoard.gameRunning === true &&
+      gameBoard.gameIsRunning === true &&
       game.board[0] &&
       game.board[1] &&
       game.board[2] &&
@@ -227,7 +235,7 @@ var gameBoard = (function () {
     ) {
       tie = tie + 1;
       winner.textContent = "Tie Game!";
-      gameBoard.gameRunning = false;
+      gameBoard.gameIsRunning = false;
       popupToggle();
       clearPlayerHighlights();
     }
@@ -236,7 +244,7 @@ var gameBoard = (function () {
   return {
     updateBoard: updateBoard,
     restartGame: restartGame,
-    gameRunning: gameRunning,
+    gameIsRunning: gameIsRunning,
     checkTie: checkTie,
     checkWinner: checkWinner,
     game: game,
@@ -298,7 +306,7 @@ cells.forEach((cell) => {
     if (
       gameBoard.game.board[i] === "" &&
       pOne.turn === true &&
-      gameBoard.gameRunning === true
+      gameBoard.gameIsRunning === true
     ) {
       gameBoard.game.board[i] = "X";
       gameBoard.createX(i);
@@ -309,19 +317,34 @@ cells.forEach((cell) => {
       isPlayerOneTurn();
       isPlayerTwoTurn();
       aiTurn();
-      if (gameBoard.gameRunning === false) {
+      if (gameBoard.gameIsRunning === false) {
         clearPlayerHighlights();
       }
     }
   });
 });
 
+body.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+  removeMarker();
+});
+
+function removeMarker() {
+  const img = document.querySelectorAll(".marked");
+  img.forEach((image) => {
+    image.remove();
+  });
+}
+
 function createO(n) {
   const div = document.querySelector(`[data-index="${n}"]`);
+  const container = document.createElement("div");
   const img = document.createElement("img");
   img.src = "img/o.png";
+  container.classList.add("marked");
   img.classList.add("markerO");
-  div.appendChild(img);
+  div.appendChild(container);
+  container.appendChild(img);
 }
 
 //Player 2 click action
@@ -332,7 +355,7 @@ cells.forEach((cell) => {
     if (
       gameBoard.game.board[i] === "" &&
       pOne.turn === false &&
-      gameBoard.gameRunning === true &&
+      gameBoard.gameIsRunning === true &&
       ai === false
     ) {
       gameBoard.game.board[i] = "0";
@@ -361,12 +384,13 @@ backButton.forEach((x) => {
 
 function reset() {
   //clears the board array
+  removeMarker();
   gameBoard.game.board.forEach((n, i, arr) => {
     arr[i] = "";
   });
   gameBoard.updateBoard();
   winner.textContent = "";
-  gameBoard.gameRunning = true;
+  gameBoard.gameIsRunning = true;
   gameBoard.gameNumber = 2;
   gameBoard.gameNumber = 0;
   gameBoard.tie = 0;
@@ -442,7 +466,7 @@ hardBtn.addEventListener("click", function () {
 //****************AI Mechanic *******************/
 
 function aiTurn() {
-  if (pOne.turn === false && ai === true && gameBoard.gameRunning === true) {
+  if (pOne.turn === false && ai === true && gameBoard.gameIsRunning === true) {
     setTimeout(function () {
       let aiNumber;
       while (true) {
@@ -469,6 +493,7 @@ function aiTurn() {
         }
       }
       gameBoard.game.board[aiNumber] = "0";
+      createO(aiNumber);
       gameBoard.checkWinner();
       gameBoard.updateBoard();
 
@@ -476,7 +501,7 @@ function aiTurn() {
       pTwo.toggleTurn();
       isPlayerOneTurn();
       isPlayerTwoTurn();
-      if (gameBoard.gameRunning === false) {
+      if (gameBoard.gameIsRunning === false) {
         clearPlayerHighlights();
       }
     }, 1000);
