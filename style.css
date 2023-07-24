@@ -131,7 +131,7 @@ h3 {
 }
 
 .currentTurn {
-  text-shadow: 2px 2px 3px rgb(255, 148, 77);
+  text-shadow: 2px 2px 3px rgb(224, 17, 17);
 }
 
 .tie_score {
@@ -301,4 +301,22 @@ h4 {
   padding: 0px;
   margin: 0px;
   height: 22px;
+}
+
+.markerX {
+  width: 100px;
+  height: 100px;
+}
+
+.cell {
+  position: relative;
+}
+
+.markerO {
+  width: 80px;
+  height: 120px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

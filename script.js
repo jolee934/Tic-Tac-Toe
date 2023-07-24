@@ -159,19 +159,20 @@ var gameBoard = (function () {
     aiTurn();
   }
 
+  function createX(n) {
+    const div = document.querySelector(`[data-index="${n}"]`);
+    const img = document.createElement("img");
+    img.src = "img/x.png";
+    img.classList.add("markerX");
+    div.appendChild(img);
+  }
+
   function updateBoard() {
     cells.forEach((cell) => {
       const i = cell.dataset.index;
-      cell.textContent = game.board[i];
+      // if (cell.textConn)
+      // cell.textContent = game.board[i];
     });
-  }
-
-  function createX(n) {
-    const container = document.createElement("div");
-    const img = document.createElement("img");
-    img.src = "img/x.png";
-    container.appendChild(img);
-    cellNumber[2].appendChild(container); // Add the container to the div with data-index="2"
   }
 
   function checkWinner() {
@@ -315,6 +316,14 @@ cells.forEach((cell) => {
   });
 });
 
+function createO(n) {
+  const div = document.querySelector(`[data-index="${n}"]`);
+  const img = document.createElement("img");
+  img.src = "img/o.png";
+  img.classList.add("markerO");
+  div.appendChild(img);
+}
+
 //Player 2 click action
 cells.forEach((cell) => {
   cell.addEventListener("click", function (e) {
@@ -327,6 +336,7 @@ cells.forEach((cell) => {
       ai === false
     ) {
       gameBoard.game.board[i] = "0";
+      createO(i);
       gameBoard.checkWinner();
       gameBoard.updateBoard();
       pOne.toggleTurn();
